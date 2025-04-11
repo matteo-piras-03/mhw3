@@ -41,9 +41,14 @@ body{
 }
 
 #nav_1_right button{
+    font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     border: none;
     background-color: white;
+    padding: 0px;
+    margin: 0px;
+    height: 17px;
+    font-size: 14px;
 }
 
 #nav_1_right button .category-menu{

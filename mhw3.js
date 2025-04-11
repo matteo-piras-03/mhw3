@@ -1,6 +1,12 @@
 //nav_1
-const nav1_my_eBay = document.querySelector("#nav_1_right .relative");
-const nav1_my_eBay_menu = document.querySelector("#nav_1_right .category-menu");
+const nav1_currency_exchange = document.querySelector("#currency-exchange");
+const nav1_currency_exchange_menu = document.querySelector("#currency-exchange .category-menu");
+nav1_currency_exchange.addEventListener("click", currency_exchange_click);
+function currency_exchange_click(event){
+    nav1_currency_exchange_menu.classList.toggle("hidden");
+}
+const nav1_my_eBay = document.querySelector("#my-eBay");
+const nav1_my_eBay_menu = document.querySelector("#my-eBay .category-menu");
 nav1_my_eBay.addEventListener("click", my_eBay_click);
 function my_eBay_click(event){
     nav1_my_eBay_menu.classList.toggle("hidden");
@@ -126,4 +132,21 @@ const f_country_menu = document.querySelector("#footer .category-menu");
 f_country_button.addEventListener("click", country_click);
 function country_click(event){
     f_country_menu.classList.toggle("hidden");
+}
+
+//REST_API
+//exchange-api https://github.com/fawazahmed0/exchange-api
+//Questa api restituisce il tasso di cambio tra diverse valute
+
+fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json").then(onResponse, onError).then(onJson);
+
+function onError(error) {
+    console.log("Error: " + error);
+}
+
+function onResponse(response) {
+    return response.json();
+}
+
+function onJson(json) {
 }

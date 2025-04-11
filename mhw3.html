@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>mhw2</title>
+        <title>mhw3</title>
         <link rel="stylesheet" href="mhw3.css" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <script src="mhw3.js" defer></script>
@@ -28,10 +28,18 @@
                 <span>
                     Vendi
                 </span>
-                <span>
-                    Oggetti che osservi
-                </span>
-                <button class="relative">
+                <button class="relative" id="currency-exchange">
+                    Tasso di scambio <img src="chevron-down.png" class="chevron-down"/>
+                    <div class="category-menu hidden">
+                        <span><a href="">EUR €</a></span>
+                        <span><a href="">USD $</a></span>
+                        <span><a href="">GBP £</a></span>
+                        <span><a href="">CHF Fr.</a></span>
+                        <span><a href="">TRY ₺</a></span>
+                        <span><a href="">RUB ₽</a></span>
+                    </div>
+                </button>
+                <button class="relative" id="my-eBay">
                     Il mio eBay <img src="chevron-down.png" class="chevron-down"/>
                     <div class="category-menu hidden">
                         <span><a href="">Riepilogo</a></span>
