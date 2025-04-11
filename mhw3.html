@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>mhw2</title>
+        <link rel="stylesheet" href="mhw3.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <script src="mhw3.js" defer></script>
+    </head>
+    <body>
+        <nav id="nav_1">
+            <div id="nav_1_left">
+                <span>
+                    Ciao! (<a href="https://signin.ebay.it/signin/">Accedi</a>)
+                </span>
+                <span>
+                    eBay Extra
+                </span>
+                <span>
+                    eBay Imperdibili
+                </span>
+                <span>
+                    Aiuto e contatti
+                </span>
+            </div>
+            <div id="nav_1_right">
+                <span>
+                    Vendi
+                </span>
+                <span>
+                    Oggetti che osservi
+                </span>
+                <button class="relative">
+                    Il mio eBay <img src="chevron-down.png" class="chevron-down"/>
+                    <div class="category-menu hidden">
+                        <span><a href="">Riepilogo</a></span>
+                        <span><a href="">Viste di recente</a></span>
+                        <span><a href="">Offerte/Proposte</a></span>
+                        <span><a href="">Cronologia acquisti</a></span>
+                        <span><a href="">Vendite</a></span>
+                        <span><a href="">Ricerche salvate</a></span>
+                        <span><a href="">Venditori salvati</a></span>
+                        <span><a href="">Messaggi</a></span>
+                    </div>
+                </button>
+                <img src="bell-icon.png" id="bell-icon"/>
+                <img src="shopping-cart-icon.png" id="shopping-cart-icon"/>
+            </div>
+        </nav>
+        <nav id="nav_1_mobile">
+            <img src="eBay_logo.png" class="ebay-logo"/>
+            <div id="nav_1_mobile_right">
+                <img src="avatar-outline.png" />
+                <img src="shopping-cart-icon.png" />
+                <div id="mobile_menu" class="relative">
+                    <img src="hamburger-icon.png" />
+                    <div class="category-menu hidden">
+                        <span><a href="">Accedi</a></span>
+                        <span><a href="">eBay extra</a></span>
+                        <span><a href="">Aiuto e contatti</a></span>
+                        <span><a href="">Vendi</a></span>
+                        <span><a href="">Oggetti che osservi</a></span>
+                        <span><a href="">Notifiche</a></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="gray-line"></div>
+        <header id="header">
+            <img src="eBay_logo.png" class="ebay-logo"/>
+            <div class="relative">
+                <button id="category-button">
+                    <div>
+                    Scegli la <br>categoria
+                    </div>
+                    <img src="chevron-down.png" class="chevron-down"/>
+                </button>
+                <div class="category-menu hidden">
+                    <span><a href="">Abbigliamento e accessori</a></span>
+                    <span><a href="">Ricambi veicoli</a></span>
+                    <span><a href="">Sport e viaggi</a></span>
+                    <span><a href="">Casa, arredamento e bricolage</a></span>
+                    <span><a href="">TV, audio e video</a></span>
+                    <span><a href="">Informatica</a></span>
+                    <span><a href="">Telefonia fissa e mobile</a></span>
+                    <span><a href="">Giocattoli e modellismo</a></span>
+                </div>
+            </div>
+            <div id="search_bar">
+                <input type="text" name="query" placeholder="Cerca su eBay" id="search_box" required>
+                <img src="search-icon.png" />
+            </div>
+            <div id="search">
+                Cerca
+            </div>
+            <div id="avanzata">
+                Avanzata
+            </div>
+        </header>
+        <div class="gray-line"></div>
+        <nav id="nav_2">
+            <a href="">
+                Salvato
+            </a>
+            <a href="">
+                Elettronica
+            </a>
+            <a href="">
+                Gaming
+            </a>
+            <a href="">
+                Elettrodomestici
+            </a>
+            <a href="">
+                Salvato
+            </a>
+            <a href="">
+                Casa e Giardino
+            </a>
+            <a href="">
+                Fai da te
+            </a>
+            <a href="">
+                Collezionismo
+            </a>
+            <a href="">
+                Moda
+            </a>
+            <a href="">
+                Sport
+            </a>
+            <a href="">
+                Motori
+            </a>
+            <a href="">
+                Ricondizionato
+            </a>
+            <a href="">
+                Aste di beneficenza
+            </a>
+        </nav>
+        <article id="main">
+            <section id="section-1" class="content-1">
+                <div id="overlay-1">
+                    <div class="upper">
+                        <div class="text">
+                            <h1>Restituisci con facilità</h1>
+                            <p>Se l'ordine non ti soddisfa, puoi restituirlo senza problemi.<br></p>
+                            <button class="button-1 text-button">Scopri di più</button>
+                        </div>
+                        <img src=""/>
+                    </div>
+                    <div id="nav-small">
+                        <div class="spacer"></div>
+                        <div id="nav-small-left">
+                            <div class="dot" data-index="0" data-active="1" data-content="1"></div>
+                            <div class="dot" data-index="1" data-active="0" data-content="1"></div>
+                            <div class="dot" data-index="2" data-active="0" data-content="1"></div>
+                        </div>
+                        <div id="nav-small-right">
+                            <button data-position="left">
+                                <img src="chevron-left.png" class="chevron-left"/>
+                            </button>
+                            <button data-position="right">
+                                <img src="chevron-right.png" class="chevron-right"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <h1>I brand più ricercati su eBay</h1>
+            <section id="section-2">
+                <a>
+                    <div class="circle">
+                        <img src="apple_logo.png" />
+                    </div>
+                    <span>
+                        Apple
+                    </span>
+                </a>
+                <a>
+                    <div class="circle">
+                        <img src="dyson_logo.png" />
+                    </div>
+                    <span>
+                        Dyson
+                    </span>
+                </a>
+                <a>
+                    <div class="circle">
+                        <img src="samsung_logo.png" />
+                    </div>
+                    <span>
+                        Samsung
+                    </span>
+                </a>
+                <a>
+                    <div class="circle">
+                        <img src="nintendo_logo.png" />
+                    </div>
+                    <span>
+                        Nintendo
+                    </span>
+                </a>
+                <a>
+                    <div class="circle">
+                        <img src="pokemon_logo.png" />
+                    </div>
+                    <span>
+                        Pokémon
+                    </span>
+                </a>
+                <a>
+                    <div class="circle">
+                        <img src="playstation_logo.png" />
+                    </div>
+                    <span>
+                        PlayStation
+                    </span>
+                </a>
+                <a>
+                    <div class="circle">
+                        <img src="LEGO_logo.png" />
+                    </div>
+                    <span>
+                        Lego
+                    </span>
+                </a>
+            </section>
+            <section id="section-3">
+                <div>
+                    <p>
+                        <h1>Servizio clienti eBay</h1>
+                        Dalla spedizione ai resi, se hai dubbi, siamo qui per aiutarti.
+                    </p>
+                </div>
+                <span class="button">Scopri di più</span>
+            </section>
+            <section id="section-4">
+                <div class="item-list">
+                    <div class="item">
+                        <div class="first">
+                            <div class="text">
+                                <h1>Fino al 25% di sconto su Zipper!</h1>
+                                Una selezione per il giardino e il fai da te<br>
+                                <span class="button">Compra</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/drwAAOSwxNllQ1bH/s-l500.jpg" />
+                        <p>
+                            CARRIOLA ELETTRICA A BATTERIA 24V 500W ZIPPER ZI-EWB500<br>
+                            <span class="price">EUR 379,00</span>  <span class="old-price">EUR 473,80</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/-c0AAOSwHiBkQTib/s-l500.jpg" />
+                        <p>
+                            DECESPUGLIATORE TAGLIAERBA A MOTORE 51,7 CC ZIPPER ZI-MOS145JAK<br>
+                            <span class="price">EUR 109,99</span>  <span class="old-price">EUR 137,50</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/RXAAAOSwFfFkQTia/s-l500.jpg" />
+                        <p>
+                            MARTELLO PNEUMATICO PERFORATORE 1500W ZIPPER ZI-ABH1500D<br>
+                            <span class="price">EUR 159,90</span>  <span class="old-price">EUR 199,90</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/DwQAAOSwUVZkQTif/s-l500.jpg" />
+                        <p>
+                            ASPIRATORE ASPIRA TRUCIOLI POLVERE 1100W ZIPPER ZI-ASA305<br>
+                            <span class="price">EUR 109,90</span>  <span class="old-price">EUR 109,34</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/UZAAAOSwzURnGLpi/s-l500.jpg" />
+                        <p>
+                            ASPIRATORE TRUCIOLI SACCO ASPIRATRUCIOLI CARRELLATO ZIPPER ZI-ASA550E<br>
+                            <span class="price">EUR 379,00</span>  <span class="old-price">EUR 473,80</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/sOsAAOSwuIZkQTic/s-l500.jpg" />
+                        <p>
+                            ASPIRATORE ASPIRA TRUCIOLI POLVERE 1100W ZIPPER ZI-ASA305A<br>
+                            <span class="price">EUR 115,90</span>  <span class="old-price">EUR 144,90</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section id="section-5">
+                <div class="item-list">
+                    <div class="item">
+                        <div class="first">
+                            <div class="text">
+                                <h1>Elettrodomestici ricondizionati</h1>
+                                Approfitta del coupon 10%<br>
+                                <span class="button">Compra</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/4MAAAeSwc5Fn0XU2/s-l500.jpg" />
+                        <p>
+                            Aspirapolvere senza filo Dyson V8™ Absolute | Ricondizionato<br>
+                            <span class="price">EUR 269,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/itcAAOSwADVdxGWS/s-l500.jpg" />
+                        <p>
+                            BATTITAPPETO MATERASSO FOLLETTO EB350/351<br>
+                            <span class="price">EUR 29,99</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/IcAAAOSw7SBmVHq6/s-l500.jpg" />
+                        <p>
+                            Aspirapolvere senza filo Dyson V15 Detect™ Absolute | Ricondizionato<br>
+                            <span class="price">EUR 499,00</span>  <span class="old-price">EUR 549,00</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/uRwAAOSw99plnvqb/s-l500.jpg" />
+                        <p>
+                            Robot da cucina Braun PureEase FP 3131 Bianco - 2 anni di garanzia<br>
+                            <span class="price">EUR 44,90</span>  <span class="old-price">EUR 89,99</span>
+                        </p>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/dSoAAOSwQctnEqfZ/s-l500.jpg" />
+                        <p>
+                            Macchina del pane forno impasta cottura robot cucina automatica SBB 850 cuoce<br>
+                            <span class="price">EUR 39,90</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <h1>Il marketplace delle passioni</h1>
+            <section id="section-6">
+                <a>
+                    <img src="https://ir.ebaystatic.com/cr/v/c01/1_PopDest_Homepage_Refresh_Elettronica.jpg"/>
+                    <span>
+                        Elettronica
+                    </span>
+                </a>
+                <a>
+                    <img src="https://i.ebayimg.com/images/g/XVIAAOSwTo9j8zCN/s-l500.jpg"/>
+                    </div>
+                    <span>
+                        Elettrodomestici
+                    </span>
+                </a>
+                <a>
+                    <img src="https://i.ebayimg.com/images/g/5f4AAOSwXrhj8zCO/s-l500.jpg"/>
+                    </div>
+                    <span>
+                        Casa e giardino
+                    </span>
+                </a>
+                <a>
+                    <img src="https://i.ebayimg.com/images/g/86oAAOSwx-xj8zCO/s-l500.jpg"/>
+                    </div>
+                    <span>
+                        Motori
+                    </span>
+                </a>
+                <a>
+                    <img src="https://i.ebayimg.com/images/g/6HwAAOSwsSxj8zCO/s-l500.jpg"/>
+                    </div>
+                    <span>
+                        Collezionismo e passioni
+                    </span>
+                </a>
+                <a>
+                    <img src="https://ir.ebaystatic.com/cr/v/c01/PopDest_Homepage_Refresh_ModaBellezza.jpg"/>
+                    </div>
+                    <span>
+                        Moda e bellezza
+                    </span>
+                </a>
+                <a>
+                    <img src="https://i.ebayimg.com/images/g/H6QAAOSwnntj80O-/s-l500.jpg"/>
+                    </div>
+                    <span>
+                        Ricondizionato
+                    </span>
+                </a>
+            </section>
+            <section id="section-7">
+                <div class="text">
+                    <h1>Vivi la primavera col coupon 10%</h1>
+                    Trova i prodotti in offerta e risparmia fino a 100€<br>
+                    <span class="button">Inizia ora</span>
+                </div>
+                <img src="spring-items.png" />
+            </section>
+        </article>
+        <footer id="footer">
+            <div id="footer-container">
+                <div class="block-container">
+                    <span>Compra</span><br>
+                    Come fare acquisti<br>
+                    Acquisti per categoria<br>
+                    eBay Imperdibili<br>
+                    App eBay<br>
+                    I brand in vendita su eBay<br>
+                    Marche auto<br>
+                    Aste di beneficenza<br>
+                    Negozi Hub<br>
+                    eBay Extra<br>
+                </div>
+                <div class="block-container">
+                    <span>Vendi su eBay</span><br>
+                    Spazio venditori<br>
+                    Tariffe venditori<br>
+                    Negozi<br>
+                    Centro spedizioni<br>
+                    Protezione venditori<br>
+                    Vendite internazionali<br>
+                    Novità per i venditori professionali<br>
+                    Strumenti di vendita<br>
+                </div>
+                <div class="block-container">
+                    <span>A proposito di eBay</span><br>
+                    Informazioni Note legali<br>
+                    Mediazione<br>
+                    Ufficio stampa<br>
+                    Pubblicità su eBay<br>
+                    Affiliazione<br>
+                    Lavora in eBay<br>
+                    VeRO: Proprietà Intellettuale<br>
+                </div>
+                <div class="block-container">
+                    <p>
+                        <span>Aiuto e contatti</span><br>
+                        Spazio sicurezza<br>
+                        Garanzia cliente eBay<br>
+                    </p>
+                    <p>
+                        <span>Community</span><br>
+                        Facebook<br>
+                        YouTube<br>
+                        Instagram<br>
+                        Domande e risposte tra utenti<br>
+                        Forum<br>
+                        Gruppi<br>
+                        Bacheca Annunci<br>
+                    </p>
+                    <p>
+                        <span>Siti eBay</span><br>
+                        <div id="selector" class="relative">
+                            <img src="italian-flag.png" />
+                            <p>
+                                Italia 
+                            </p>
+                            <img src="chevron-down.png" class="chevron-down"/>
+                            <div class="category-menu hidden">
+                                <span><a href="">Gran Bretagna</a></span>
+                                <span><a href="">Germania</a></span>
+                                <span><a href="">Spagna</a></span>
+                                <span><a href="">Francia</a></span>
+                                <span><a href="">Paesi bassi</a></span>
+                                <span><a href="">Danimarca</a></span>
+                                <span><a href="">Russia</a></span>
+                                <span><a href="">Austria</a></span>
+                                <span><a href="">Italia</a></span>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <div id="copyright">
+                Copyright 2025 Matteo Piras. Tutti i diritti riservati.
+            </div>
+        </footer>
+    </body>
+</html>
