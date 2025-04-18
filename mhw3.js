@@ -1,16 +1,40 @@
+//category menu
+function menu_a_click(event){
+  event.preventDefault();
+}
+
+const menu_as = document.querySelectorAll(".category-menu span a");
+for(const a of menu_as){
+    a.addEventListener("click", menu_a_click);
+}
+
 //nav_1
 const nav1_currency_exchange = document.querySelector("#currency-exchange");
 const nav1_currency_exchange_menu = document.querySelector("#currency-exchange .category-menu");
+
+const currency_as = document.querySelectorAll("#currency-exchange .category-menu span a");
+const currencies = {}; //inizializzazione della mappa currencies che viene riempito con le valute contenute nel menu #currency-exchange
+for(const currency_a of currency_as){
+    currencies[currency_a.id] = 0;
+}
+
 nav1_currency_exchange.addEventListener("click", currency_exchange_click);
 function currency_exchange_click(event){
     nav1_currency_exchange_menu.classList.toggle("hidden");
+    const currency = event.target.id;
+    if(currency in currencies){
+        convert_currency(currency);
+    }
 }
+
 const nav1_my_eBay = document.querySelector("#my-eBay");
 const nav1_my_eBay_menu = document.querySelector("#my-eBay .category-menu");
 nav1_my_eBay.addEventListener("click", my_eBay_click);
 function my_eBay_click(event){
     nav1_my_eBay_menu.classList.toggle("hidden");
 }
+
+
 
 //nav_1_mobile
 const navmobile_menu_button = document.querySelector("#nav_1_mobile #mobile_menu");
@@ -149,4 +173,110 @@ function onResponse(response) {
 }
 
 function onJson(json) {
+    //json.eur è un oggetto ha come proprieta' le valute e i rispettivi tassi di cambio rispetto all'euro
+    //ad ogni valuta contenuta nella mappa delle valute viene assegnato il tasso di cambio rispetto all'euro
+    for(const currency in currencies){
+        currencies[currency] = json.eur[currency];
+    }
+}
+
+const prices = document.querySelectorAll(".price");
+const old_prices = document.querySelectorAll(".old-price");
+const prices_array = [];
+const old_prices_array = [];
+map_prices();
+function map_prices(){
+    let i = 0;
+    for(const price of prices){
+        prices_array[i] = parseFloat(price.textContent).toFixed(2);
+        i++;
+    }
+    i = 0;
+    for(const old_price of old_prices){
+        old_prices_array[i] = parseFloat(old_price.textContent).toFixed(2);
+        i++;
+    }
+}
+
+
+
+function convert_currency(currency){
+    let currency_symbol = "";
+    switch(currency){
+        case "eur":
+            currency_symbol = "€";
+            break;
+        case "usd":
+            currency_symbol = "$";
+            break;
+        case "gbp":
+            currency_symbol = "£";
+            break;
+        case "chf":
+            currency_symbol = "Fr.";
+            break;
+        case "try":
+            currency_symbol = "₺";
+            break;
+        case "rub":
+            currency_symbol = "₽";
+            break;
+    }
+    let i = 0;
+    for(const price of prices){
+        price.textContent = (prices_array[i] * currencies[currency]).toFixed(2) + " " + currency_symbol;
+        i++;
+    }
+    i = 0;
+    for(const price of old_prices){
+        price.textContent = (old_prices_array[i] * currencies[currency]).toFixed(2) + " " + currency_symbol;
+        i++;
+    }
+
+}
+
+//ebay-api https://developer.ebay.com/api-docs
+//richiesta token
+
+fetch("https://api.sandbox.ebay.com/identity/v1/oauth2/token", {
+    method: "post",
+    body: "grant_type=client_credentials&scope=https://api.ebay.com/oauth/api_scope",
+    mode: "no-cors",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Basic " + btoa("" + ":" + "")
+    }
+}).then(onTokenResponse, onTokenError).then(onTokenJson);
+
+
+const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+myHeaders.append("Authorization", "Basic ");
+
+const urlencoded = new URLSearchParams();
+urlencoded.append("grant_type", "client_credentials");
+urlencoded.append("scope", "https://api.ebay.com/oauth/api_scope");
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: urlencoded,
+  mode: "no-cors"
+};
+
+fetch("https://api.sandbox.ebay.com/identity/v1/oauth2/token", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
+function onTokenResponse(response) {
+    return response.json();
+}
+
+function onTokenError(error) {
+    console.log("Error: " + error);
+}
+
+function onTokenJson(json) {
+    console.log(json.access_token);
 }
