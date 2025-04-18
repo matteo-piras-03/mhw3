@@ -95,16 +95,13 @@
                     <span><a href="">Giocattoli e modellismo</a></span>
                 </div>
             </div>
-            <div id="search_bar">
-                <input type="text" name="query" placeholder="Cerca su eBay" id="search_box" required>
-                <img src="search-icon.png" />
-            </div>
-            <div id="search">
-                Cerca
-            </div>
-            <div id="avanzata">
-                Avanzata
-            </div>
+            <form>
+                <div id="search_bar">
+                    <input type="text" name="query" placeholder="Cerca su eBay" id="search_box" required>
+                    <img src="search-icon.png" />
+                </div>
+                <input type="submit" value="Cerca" id="search_button">
+            </form>
         </header>
         <div class="gray-line"></div>
         <nav id="nav_2">
@@ -149,6 +146,18 @@
             </a>
         </nav>
         <article id="main">
+            <section id="search_results" class="hidden">
+                <h1>Risultati della ricerca</h1>
+                <div id="search_results_container">
+                    <div class="item">
+                        <img src="https://i.ebayimg.com/images/g/drwAAOSwxNllQ1bH/s-l500.jpg" />
+                        <p>
+                            CARRIOLA ELETTRICA A BATTERIA 24V 500W ZIPPER ZI-EWB500<br>
+                            <span class="price">379.00 €</span>  <span class="old-price">430.80 €</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
             <section id="section-1" class="content-1">
                 <div id="overlay-1">
                     <div class="upper">

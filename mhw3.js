@@ -201,6 +201,21 @@ function map_prices(){
 
 
 function convert_currency(currency){
+    const currency_symbol = currency_to_symbol(currency);
+    let i = 0;
+    for(const price of prices){
+        price.textContent = (prices_array[i] * currencies[currency]).toFixed(2) + " " + currency_symbol;
+        i++;
+    }
+    i = 0;
+    for(const price of old_prices){
+        price.textContent = (old_prices_array[i] * currencies[currency]).toFixed(2) + " " + currency_symbol;
+        i++;
+    }
+
+}
+
+function currency_to_symbol(currency){
     let currency_symbol = "";
     switch(currency){
         case "eur":
@@ -222,17 +237,7 @@ function convert_currency(currency){
             currency_symbol = "₽";
             break;
     }
-    let i = 0;
-    for(const price of prices){
-        price.textContent = (prices_array[i] * currencies[currency]).toFixed(2) + " " + currency_symbol;
-        i++;
-    }
-    i = 0;
-    for(const price of old_prices){
-        price.textContent = (old_prices_array[i] * currencies[currency]).toFixed(2) + " " + currency_symbol;
-        i++;
-    }
-
+    return currency_symbol;
 }
 
 //ebay-api https://developer.ebay.com/api-docs
@@ -241,33 +246,11 @@ function convert_currency(currency){
 fetch("https://api.sandbox.ebay.com/identity/v1/oauth2/token", {
     method: "post",
     body: "grant_type=client_credentials&scope=https://api.ebay.com/oauth/api_scope",
-    mode: "no-cors",
     headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Basic " + btoa("" + ":" + "")
+        "Authorization": "Basic " + btoa("<client>" + ":" + "<secret>")
     }
 }).then(onTokenResponse, onTokenError).then(onTokenJson);
-
-
-const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-myHeaders.append("Authorization", "Basic ");
-
-const urlencoded = new URLSearchParams();
-urlencoded.append("grant_type", "client_credentials");
-urlencoded.append("scope", "https://api.ebay.com/oauth/api_scope");
-
-const requestOptions = {
-  method: "POST",
-  headers: myHeaders,
-  body: urlencoded,
-  mode: "no-cors"
-};
-
-fetch("https://api.sandbox.ebay.com/identity/v1/oauth2/token", requestOptions)
-  .then((response) => response.text())
-  .then((result) => console.log(result))
-  .catch((error) => console.error(error));
 
 function onTokenResponse(response) {
     return response.json();
@@ -277,6 +260,72 @@ function onTokenError(error) {
     console.log("Error: " + error);
 }
 
+var token = "";
+
 function onTokenJson(json) {
-    console.log(json.access_token);
+    token = json.access_token;
+}
+
+//implemetazione della richiesta di ricerca di prodotti su eBay
+const search_form = document.querySelector("#header form");
+search_form.addEventListener("submit", search_form_submit);
+
+//event listener per il click sul pulsante di ricerca
+function search_form_submit(event){
+    event.preventDefault();
+    const search_input = document.querySelector("#search_box");
+    const search_value = encodeURIComponent(search_input.value);
+    if(search_value.length > 0){
+        console.log("Searching for: " + search_value);
+        fetch("https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?q=" + search_value + "&limit=15", {
+            method: "get",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json",
+                "X-EBAY-C-MARKETPLACE-ID": "EBAY_IT"
+            }
+        }).then(onSearchResponse, onSearchError).then(onSearchJson);
+    }
+}
+
+function onSearchResponse(response) {
+    return response.json();
+}
+
+function onSearchError(error) {
+    console.log("Error: " + error);
+}
+
+//l'oggetto json restituito dalla ricerca contiene un array di oggetti itemSummary
+//ogni oggetto itemSummary contiene le informazioni sul prodotto, come il titolo, il prezzo, l'immagine, ecc.
+function onSearchJson(json) {
+    const search_results = document.querySelector("#search-results");
+    search_results.classList.remove("hidden");
+    const search_results_container = document.querySelector("#search_results_container");
+    search_results_container.innerHTML = ""; //svuota il contenitore dei risultati di ricerca (per evitare di aggiungere i nuovi risultati ai vecchi)
+    const item_summaries = json.itemSummaries;
+    for(const item_summary of item_summaries){
+        const title = item_summary.title;
+        const price = item_summary.price.value;
+        const currency = item_summary.price.currency;
+        const currency_symbol = currency_to_symbol(currency);
+        
+        //creazione dell'item da inserire nel contenitore dei risultati di ricerca
+        const img = document.createElement("img");
+        img.src = item_summary.image.imageUrl;
+
+        const item = document.createElement("div");
+        item.classList.add("item");
+        item.appendChild(img);
+
+        const p = document.createElement("p");
+        p.textContent = title + "<br>";
+        const span = document.createElement("span");
+        span.classList.add("price");
+        span.textContent = price + " " + currency_symbol;
+        p.appendChild(span);
+        item.appendChild(p);
+
+        search_results_container.appendChild(item);
+    }
 }
