@@ -299,7 +299,7 @@ function onSearchError(error) {
 //l'oggetto json restituito dalla ricerca contiene un array di oggetti itemSummary
 //ogni oggetto itemSummary contiene le informazioni sul prodotto, come il titolo, il prezzo, l'immagine, ecc.
 function onSearchJson(json) {
-    const search_results = document.querySelector("#search-results");
+    const search_results = document.querySelector("#search_results");
     search_results.classList.remove("hidden");
     const search_results_container = document.querySelector("#search_results_container");
     search_results_container.innerHTML = ""; //svuota il contenitore dei risultati di ricerca (per evitare di aggiungere i nuovi risultati ai vecchi)

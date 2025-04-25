@@ -22,6 +22,15 @@ body{
     margin: 0 auto;
 }
 
+#nav_1 a{
+    text-decoration: none;
+    color: #303030;
+}
+#nav_1 a:hover{
+    color: royalblue;
+    text-decoration: underline;
+}
+
 .gray-line{
     height: 1px;
     background-color: gainsboro;
@@ -49,6 +58,7 @@ body{
     margin: 0px;
     height: 17px;
     font-size: 14px;
+    cursor: pointer;
 }
 
 #nav_1_right button .category-menu{
@@ -105,6 +115,7 @@ body{
     background-color: white;
     padding: 0px;
     padding-right: 4px;
+    cursor: pointer;
 }
 
 .category-menu {
@@ -172,6 +183,7 @@ body{
     padding: 10px 50px;
     border-radius: 20px;
     border: none;
+    cursor: pointer;
 }
 
 #header #avanzata{
@@ -332,6 +344,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 #nav-small-right button:hover{
@@ -382,6 +395,7 @@ body{
     border-radius: 20px;
     border: none;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 #section-1 .button-1{
@@ -446,6 +460,7 @@ body{
     padding: 12px 20px;
     border-radius: 20px;
     margin: 0px 20px;
+    cursor: pointer;
 }
 
 #section-4 {
@@ -477,6 +492,7 @@ body{
     border-radius: 20px;
     position: relative;
     top: 20px;
+    cursor: pointer;
 }
 
 #section-5 {
@@ -612,6 +628,7 @@ body{
     border-radius: 20px;
     position: relative;
     top: 20px;
+    cursor: pointer;
 }
 
 #section-7 .text{
@@ -788,6 +805,7 @@ body{
     
     #header #search_button{
         display: none;
+        cursor: pointer;
     }
     
     #header #avanzata{
