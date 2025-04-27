@@ -130,7 +130,7 @@ function change_content(){
             s1_text.appendChild(s1_text_h1);
             s1_text.appendChild(s1_text_p);
             s1_text.appendChild(s1_text_button);
-            s1_img.src = "coupon-10.png";
+            s1_img.src = "assets/images/coupon-10.png";
             break;
         case 2:
             for(const dot of s1_dots){
@@ -148,7 +148,7 @@ function change_content(){
             s1_text.appendChild(s1_text_h1);
             s1_text.appendChild(s1_text_p);
             s1_text.appendChild(s1_text_button);
-            s1_img.src = "auction-items.png";
+            s1_img.src = "assets/images/auction-items.png";
             break;
     }
 }
