@@ -39,8 +39,6 @@ function my_eBay_click(event){
     nav1_my_eBay_menu.classList.toggle("hidden");
 }
 
-
-
 //nav_1_mobile
 const navmobile_menu_button = document.querySelector("#nav_1_mobile #mobile_menu");
 const navmobile_menu = document.querySelector("#nav_1_mobile .category-menu");
@@ -257,6 +255,31 @@ function currency_to_symbol(currency){
     return currency_symbol;
 }
 
+//ebay-api https://developer.ebay.com/api-docs
+//richiesta token
+
+fetch("https://api.sandbox.ebay.com/identity/v1/oauth2/token", {
+    method: "post",
+    body: "grant_type=client_credentials&scope=https://api.ebay.com/oauth/api_scope",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Basic " + btoa("<client>" + ":" + "<secret>")
+    }
+}).then(onTokenResponse, onTokenError).then(onTokenJson);
+
+function onTokenResponse(response) {
+    return response.json();
+}
+
+function onTokenError(error) {
+    console.log("Error: " + error);
+}
+
+var token = "";
+
+function onTokenJson(json) {
+    token = json.access_token;
+}
 
 //implemetazione della richiesta di ricerca di prodotti su eBay
 const search_form = document.querySelector("#header form");
