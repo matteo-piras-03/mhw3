@@ -13,17 +13,22 @@ const nav1_currency_exchange = document.querySelector("#currency-exchange");
 const nav1_currency_exchange_menu = document.querySelector("#currency-exchange .category-menu");
 
 const currency_as = document.querySelectorAll("#currency-exchange .category-menu span a");
-const currencies = {}; //inizializzazione della mappa currencies che viene riempito con le valute contenute nel menu #currency-exchange
-for(const currency_a of currency_as){
-    currencies[currency_a.id] = 0;
+const currencies = [];
+for (const currency of currency_as) {
+    currencies.push(currency.id);
 }
 
 nav1_currency_exchange.addEventListener("click", currency_exchange_click);
-function currency_exchange_click(event){
+var currency_selected = "eur";
+var previous_currency_selected = "eur";
+async function currency_exchange_click(event){
     nav1_currency_exchange_menu.classList.toggle("hidden");
-    const currency = event.target.id;
-    if(currency in currencies){
-        convert_currency(currency);
+    currency_selected = event.target.id;
+    if(currencies.includes(currency_selected)){
+        get_prices();
+        const exchange_rate = await get_currency_exchange(previous_currency_selected); //utilizzo await per la sincronizzazione
+        console.log(exchange_rate);
+        convert_currency_homepage(exchange_rate);
     }
 }
 
@@ -161,8 +166,9 @@ function country_click(event){
 //REST_API
 //exchange-api https://github.com/fawazahmed0/exchange-api
 //Questa api restituisce il tasso di cambio tra diverse valute
-
-fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json").then(onResponse, onError).then(onJson);
+async function get_currency_exchange(old_currency){
+    return fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/" + old_currency + ".json").then(onResponse, onError).then(json => onJson(json, old_currency));
+}
 
 function onError(error) {
     console.log("Error: " + error);
@@ -172,19 +178,28 @@ function onResponse(response) {
     return response.json();
 }
 
-function onJson(json) {
-    //json.eur è un oggetto ha come proprieta' le valute e i rispettivi tassi di cambio rispetto all'euro
-    //ad ogni valuta contenuta nella mappa delle valute viene assegnato il tasso di cambio rispetto all'euro
-    for(const currency in currencies){
-        currencies[currency] = json.eur[currency];
-    }
+function onJson(json, old_currency) {
+    //json[eur] è un oggetto ha come proprieta' le valute e i rispettivi tassi di cambio rispetto all'euro
+    console.log(json);
+    const exchange_rate = json[old_currency][currency_selected];
+    previous_currency_selected = currency_selected;
+    return exchange_rate;
 }
 
-const prices = document.querySelectorAll(".price");
-const old_prices = document.querySelectorAll(".old-price");
+var prices;
+var old_prices;
+
+function get_prices(){
+    prices = document.querySelectorAll(".price");
+    old_prices = document.querySelectorAll(".old-price");
+    console.log(prices);
+    console.log(old_prices);
+    map_prices();
+}
+
 const prices_array = [];
 const old_prices_array = [];
-map_prices();
+
 function map_prices(){
     let i = 0;
     for(const price of prices){
@@ -198,21 +213,23 @@ function map_prices(){
     }
 }
 
-
-
-function convert_currency(currency){
-    const currency_symbol = currency_to_symbol(currency);
+function convert_currency_homepage(exchange_rate){
     let i = 0;
     for(const price of prices){
-        price.textContent = (prices_array[i] * currencies[currency]).toFixed(2) + " " + currency_symbol;
+        price.textContent = convert_currency_single(prices_array[i], exchange_rate);
         i++;
     }
     i = 0;
     for(const price of old_prices){
-        price.textContent = (old_prices_array[i] * currencies[currency]).toFixed(2) + " " + currency_symbol;
+        price.textContent = convert_currency_single(old_prices_array[i], exchange_rate);
         i++;
     }
+}
 
+function convert_currency_single(start_price, exchange_rate){
+    const currency_symbol = currency_to_symbol(currency_selected);
+    const price = (start_price * exchange_rate).toFixed(2) + " " + currency_symbol;
+    return price;
 }
 
 function currency_to_symbol(currency){
@@ -240,31 +257,6 @@ function currency_to_symbol(currency){
     return currency_symbol;
 }
 
-//ebay-api https://developer.ebay.com/api-docs
-//richiesta token
-
-fetch("https://api.sandbox.ebay.com/identity/v1/oauth2/token", {
-    method: "post",
-    body: "grant_type=client_credentials&scope=https://api.ebay.com/oauth/api_scope",
-    headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Basic " + btoa("<client>" + ":" + "<secret>")
-    }
-}).then(onTokenResponse, onTokenError).then(onTokenJson);
-
-function onTokenResponse(response) {
-    return response.json();
-}
-
-function onTokenError(error) {
-    console.log("Error: " + error);
-}
-
-var token = "";
-
-function onTokenJson(json) {
-    token = json.access_token;
-}
 
 //implemetazione della richiesta di ricerca di prodotti su eBay
 const search_form = document.querySelector("#header form");
@@ -289,6 +281,7 @@ function search_form_submit(event){
 }
 
 function onSearchResponse(response) {
+    console.log(response);
     return response.json();
 }
 
@@ -296,9 +289,10 @@ function onSearchError(error) {
     console.log("Error: " + error);
 }
 
+
 //l'oggetto json restituito dalla ricerca contiene un array di oggetti itemSummary
 //ogni oggetto itemSummary contiene le informazioni sul prodotto, come il titolo, il prezzo, l'immagine, ecc.
-function onSearchJson(json) {
+async function onSearchJson(json) {
     const search_results = document.querySelector("#search_results");
     search_results.classList.remove("hidden");
     const search_results_container = document.querySelector("#search_results_container");
@@ -307,8 +301,9 @@ function onSearchJson(json) {
     for(const item_summary of item_summaries){
         const title = item_summary.title;
         const price = item_summary.price.value;
-        const currency = item_summary.price.currency;
-        const currency_symbol = currency_to_symbol(currency);
+        const currency = item_summary.price.currency.toLowerCase();
+        const exchange_rate = await get_currency_exchange(currency);
+        const converted_price = convert_currency_single(price, exchange_rate);
         
         //creazione dell'item da inserire nel contenitore dei risultati di ricerca
         const img = document.createElement("img");
@@ -319,13 +314,16 @@ function onSearchJson(json) {
         item.appendChild(img);
 
         const p = document.createElement("p");
-        p.textContent = title + "<br>";
+        const br = document.createElement("br");
+        p.textContent = title;
         const span = document.createElement("span");
         span.classList.add("price");
-        span.textContent = price + " " + currency_symbol;
+        span.textContent = converted_price;
+        p.appendChild(br);
         p.appendChild(span);
         item.appendChild(p);
 
         search_results_container.appendChild(item);
     }
 }
+
